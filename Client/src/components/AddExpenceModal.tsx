@@ -3,35 +3,32 @@ import { useState } from "react";
 import { expenseType } from "../types/expense";
 import { Moment } from "moment";
 import { DatePicker } from "@mui/x-date-pickers";
+import useExpense from "../hooks/useExpense";
 
 type props = {
   open: boolean;
   handleClose: () => void;
-  addExpense: (
-    date: Date,
-    name: string,
-    price: number,
-    type: expenseType
-  ) => void;
 };
 
-export default function AddExpenceModal({
-  open,
-  handleClose,
-  addExpense,
-}: props) {
+export default function AddExpenceModal({ open, handleClose }: props) {
+  const [expenses, setExpenses] = useExpense();
+
   const [date, setDate] = useState<Moment | null>();
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<number>();
   const [type, setType] = useState<expenseType>();
 
   const addToExpense = () => {
-    addExpense(
-      date?.toDate() as Date,
-      name,
-      price as number,
-      type as expenseType
-    );
+    setExpenses([
+      ...expenses,
+      {
+        Id: expenses.length + 1,
+        Date: date?.toDate() as Date,
+        Name: name,
+        Price: price as number,
+        Type: type as expenseType,
+      },
+    ]);
     handleClose();
   };
 
