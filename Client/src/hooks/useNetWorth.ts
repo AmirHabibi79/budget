@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
-import { netWorthAtom } from "../store";
+import { netWorthSelector } from "../store";
 
 export default function useNetWorth() {
-  return useRecoilValue(netWorthAtom);
+  return useRecoilValue(netWorthSelector);
 }
