@@ -77,7 +77,13 @@ export default function AddExpenceModal({ open, handleClose }: props) {
             format="YYYY / MM / DD"
             views={["year", "month", "day"]}
             value={date}
-            onChange={(newValue) => setDate(newValue)}
+            onChange={(newValue) => {
+              const format = newValue;
+              format?.hour(23);
+              format?.minute(59);
+              format?.second(59);
+              setDate(format);
+            }}
           />
           <Button variant="contained" color="success" onClick={addToExpense}>
             Add
