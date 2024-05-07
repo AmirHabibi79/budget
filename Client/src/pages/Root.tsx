@@ -1,11 +1,11 @@
 import { expenseType } from "../types/expense";
 import Navbar from "../components/Navbar";
-import ExpenceItem from "../components/ExpenceItem";
 import useExpense from "../hooks/useExpense";
 import Expense from "../components/Expense";
 import Budget from "../components/Budget";
+import UpcomingExpensesList from "../components/UpcomingExpensesList";
 function Root() {
-  const [expenses] = useExpense([
+  useExpense([
     {
       Id: 1,
       Name: "food for diner",
@@ -29,16 +29,9 @@ function Root() {
           <Expense />
           <Budget />
         </div>
-        <h1>Expenses</h1>
+        <h1>Upcoming Expenses</h1>
 
-        <div className="flex flex-col gap-2">
-          {expenses.length === 0 && (
-            <span className="self-center">There is no expenses</span>
-          )}
-          {expenses.map((e) => (
-            <ExpenceItem {...e} key={e.Id} />
-          ))}
-        </div>
+        <UpcomingExpensesList />
       </div>
     </div>
   );
