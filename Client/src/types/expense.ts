@@ -12,3 +12,8 @@ export enum expenseType {
   Debt,
   Insurance,
 }
+export type percentages = {
+  type: string;
+  amount: number;
+  percent: number;
+};
