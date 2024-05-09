@@ -1,4 +1,12 @@
-import { Button, Modal, TextField, Select, MenuItem } from "@mui/material";
+import {
+  Button,
+  Modal,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { useState } from "react";
 import { expenseType } from "../types/expense";
 import { Moment } from "moment";
@@ -40,9 +48,9 @@ export default function AddExpenceModal({ open, handleClose }: props) {
         handleClose();
       }}
     >
-      <div className="bg-white flex flex-col p-2">
-        <h1 className="self-center">New Expense</h1>
-        <div className="flex flex-col gap-2">
+      <div className="bg-white flex flex-col p-2 rounded-md">
+        <h1 className="self-center font-bold">New Expense</h1>
+        <div className="flex flex-col gap-7 w-[300px]">
           <TextField
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -51,21 +59,20 @@ export default function AddExpenceModal({ open, handleClose }: props) {
             size="small"
           />
 
-          {/* {
-        TODO:fix the color of select lable
-      } */}
-          <Select
-            labelId="expense-type"
-            className="text-black"
-            label="Type"
-            value={type}
-            onChange={(e) => setType(e.target.value as expenseType)}
-          >
-            <MenuItem value={0}>Eating</MenuItem>
-            <MenuItem value={1}>Clothing</MenuItem>
-            <MenuItem value={2}>Debt</MenuItem>
-            <MenuItem value={3}>Insurance</MenuItem>
-          </Select>
+          <FormControl>
+            <InputLabel>Type</InputLabel>
+            <Select
+              labelId="expense-type"
+              label="Type"
+              value={type}
+              onChange={(e) => setType(e.target.value as expenseType)}
+            >
+              <MenuItem value={0}>Eating</MenuItem>
+              <MenuItem value={1}>Clothing</MenuItem>
+              <MenuItem value={2}>Debt</MenuItem>
+              <MenuItem value={3}>Insurance</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             label="Price"
             variant="standard"
@@ -74,6 +81,7 @@ export default function AddExpenceModal({ open, handleClose }: props) {
             onChange={(e) => setPrice(parseInt(e.target.value))}
           />
           <DatePicker
+            label="Date"
             format="YYYY / MM / DD"
             views={["year", "month", "day"]}
             value={date}
@@ -85,7 +93,11 @@ export default function AddExpenceModal({ open, handleClose }: props) {
               setDate(format);
             }}
           />
-          <Button variant="contained" color="success" onClick={addToExpense}>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#A91D3A" }}
+            onClick={addToExpense}
+          >
             Add
           </Button>
         </div>

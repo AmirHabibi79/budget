@@ -10,26 +10,71 @@ function Root() {
       Id: 1,
       Name: "food for diner",
       Type: expenseType.Eating,
-      Date: new Date(),
+      Date: new Date("2024/7/7"),
       Price: 100000,
     },
     {
       Id: 2,
       Name: "food for lunch",
       Type: expenseType.Eating,
-      Date: new Date(),
+      Date: new Date("2024/7/7"),
+      Price: 100000,
+    },
+    {
+      Id: 1,
+      Name: "food for diner",
+      Type: expenseType.Eating,
+      Date: new Date("2024/7/7"),
+      Price: 100000,
+    },
+    {
+      Id: 2,
+      Name: "food for lunch",
+      Type: expenseType.Eating,
+      Date: new Date("2024/7/7"),
+      Price: 100000,
+    },
+    {
+      Id: 1,
+      Name: "food for diner",
+      Type: expenseType.Eating,
+      Date: new Date("2024/7/7"),
+      Price: 100000,
+    },
+    {
+      Id: 2,
+      Name: "food for lunch",
+      Type: expenseType.Eating,
+      Date: new Date("2024/7/7"),
+      Price: 100000,
+    },
+    {
+      Id: 1,
+      Name: "food for diner",
+      Type: expenseType.Clothing,
+      Date: new Date("2024/7/7"),
+      Price: 100000,
+    },
+    {
+      Id: 2,
+      Name: "food for lunch",
+      Type: expenseType.Clothing,
+      Date: new Date("2024/7/7"),
       Price: 100000,
     },
   ]);
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className="relative h-[100dvh] w-full  flex flex-col gap-2 ">
       <Navbar />
+
       <div className="p-2">
-        <div className="flex justify-between ">
+        <h1 className="font-bold py-2 ">Summary</h1>
+        <div className=" flex  gap-2   ">
           <Expense />
           <Budget />
         </div>
-        <h1>Upcoming Expenses</h1>
+
+        <h1 className="py-2 font-bold">Upcoming Expenses</h1>
 
         <UpcomingExpensesList />
       </div>

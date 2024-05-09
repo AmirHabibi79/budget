@@ -1,16 +1,15 @@
 import useUpcomingExpenses from "../hooks/useUpcomingExpenses";
-import ExpenceItem from "./ExpenceItem";
+import ExpenseItem from "./ExpenseItem";
 
 export default function UpcomingExpensesList() {
   const up = useUpcomingExpenses();
-  console.log(up);
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3 overflow-auto h-[calc(100vh-calc(calc(70px+12px)*5))] pb-1">
       {up.length === 0 && (
         <span className="self-center">There is no expenses</span>
       )}
       {up.map((e) => (
-        <ExpenceItem {...e} key={e.Id} />
+        <ExpenseItem {...e} key={e.Id} />
       ))}
     </div>
   );

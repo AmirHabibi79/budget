@@ -25,9 +25,9 @@ export default function EditBudgetModal({ open, handleClose }: props) {
         handleClose();
       }}
     >
-      <div className="bg-white flex flex-col p-2">
-        <h1 className="self-center">Edit Budget</h1>
-        <div className="flex flex-col gap-2">
+      <div className="bg-white flex flex-col w-[300px] p-2 rounded-md">
+        <h1 className="self-center font-bold">Edit Budget</h1>
+        <div className="flex flex-col gap-7">
           <TextField
             value={value}
             onChange={(e) => setValue(parseInt(e.target.value) as number)}
@@ -36,7 +36,12 @@ export default function EditBudgetModal({ open, handleClose }: props) {
             size="small"
           />
 
-          <Button variant="contained" color="success" onClick={edit}>
+          <Button
+            sx={{ backgroundColor: "#A91D3A" }}
+            variant="contained"
+            color="success"
+            onClick={edit}
+          >
             Edit
           </Button>
         </div>
