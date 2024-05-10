@@ -1,7 +1,6 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  const router = useLocation();
   const routes = [
     { to: "/", text: "home" },
     { to: "/spending", text: "spending" },
@@ -11,7 +10,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between p-2">
         {routes.map((r, i) => (
           <NavLink
-            className={({ isActive, isPending }) =>
+            className={({ isActive }) =>
               `capitalize ${isActive ? "font-bold" : ""}`
             }
             to={r.to}

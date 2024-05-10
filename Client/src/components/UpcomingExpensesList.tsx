@@ -1,5 +1,5 @@
 import useUpcomingExpenses from "../hooks/useUpcomingExpenses";
-import ExpenseItem from "./ExpenseItem";
+import UpcomingExpenseItem from "./UpcomingExpenseItem";
 
 export default function UpcomingExpensesList() {
   const up = useUpcomingExpenses();
@@ -9,7 +9,7 @@ export default function UpcomingExpensesList() {
         <span className="self-center">There is no expenses</span>
       )}
       {up.map((e) => (
-        <ExpenseItem {...e} key={e.Id} />
+        <UpcomingExpenseItem {...e} key={e.Id} />
       ))}
     </div>
   );
