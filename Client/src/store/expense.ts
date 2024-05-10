@@ -38,7 +38,7 @@ const expensesPercentage = selector({
       const percentage: percentages = {
         type: getType(parsedInt as expenseType),
         amount,
-        percent: parseInt(((amount / expenses.length) * 100).toString()),
+        percent: Math.round((amount / expenses.length) * 100),
       };
       return percentage;
     });
