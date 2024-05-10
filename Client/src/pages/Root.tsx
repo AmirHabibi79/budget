@@ -1,5 +1,4 @@
 import { expenseType } from "../types/expense";
-import Navbar from "../components/Navbar";
 import useExpense from "../hooks/useExpense";
 import Expense from "../components/Expense";
 import Budget from "../components/Budget";
@@ -64,20 +63,16 @@ function Root() {
     },
   ]);
   return (
-    <div className="relative h-[100dvh] w-full  flex flex-col gap-2 ">
-      <Navbar />
-
-      <div className="p-2">
-        <h1 className="font-bold py-2 ">Summary</h1>
-        <div className=" flex  gap-2   ">
-          <Expense />
-          <Budget />
-        </div>
-
-        <h1 className="py-2 font-bold">Upcoming Expenses</h1>
-
-        <UpcomingExpensesList />
+    <div className="flex flex-col gap-2 ">
+      <h1 className="font-bold py-2 ">Summary</h1>
+      <div className=" flex  gap-2   ">
+        <Expense />
+        <Budget />
       </div>
+
+      <h1 className="py-2 font-bold">Upcoming Expenses</h1>
+
+      <UpcomingExpensesList />
     </div>
   );
 }
