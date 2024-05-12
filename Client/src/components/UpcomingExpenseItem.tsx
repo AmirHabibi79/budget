@@ -9,13 +9,7 @@ export default function ExpenceItem({ Name, Date, Price, Type }: expense) {
           <span className="font-semibold">{Name}</span>
           <span className="font-thin">{exType}</span>
         </div>
-        <span>
-          {Date.getUTCFullYear() +
-            "/" +
-            Date.getUTCMonth() +
-            "/" +
-            Date.getUTCDate()}
-        </span>
+        <span>{Date.format("YYYY/MM/DD").toString()}</span>
       </div>
       <span className="font-semibold">{Price}</span>
     </div>

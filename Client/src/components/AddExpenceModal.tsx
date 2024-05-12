@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { expenseType } from "../types/expense";
-import { Moment } from "moment";
 import { DatePicker } from "@mui/x-date-pickers";
 import useExpense from "../hooks/useExpense";
+import { Dayjs } from "dayjs";
 
 type props = {
   open: boolean;
@@ -21,7 +21,7 @@ type props = {
 export default function AddExpenceModal({ open, handleClose }: props) {
   const [expenses, setExpenses] = useExpense();
 
-  const [date, setDate] = useState<Moment | null>();
+  const [date, setDate] = useState<Dayjs | null>();
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<number>();
   const [type, setType] = useState<expenseType>();
@@ -31,7 +31,7 @@ export default function AddExpenceModal({ open, handleClose }: props) {
       ...expenses,
       {
         Id: expenses.length + 1,
-        Date: date?.toDate() as Date,
+        Date: date as Dayjs,
         Name: name,
         Price: price as number,
         Type: type as expenseType,
