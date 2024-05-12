@@ -1,11 +1,61 @@
 import { expense, expenseType, percentages } from "../types/expense";
 import getType from "../helper/getExpenseTypeAsString";
 import { atom, selector } from "recoil";
-import moment from "moment";
 import lodash from "lodash";
+import dayjs, { Dayjs } from "dayjs";
 const expense = atom<expense[]>({
   key: "expense",
   default: [],
+});
+
+const expenseDuration = atom<Dayjs>({
+  key: "expenseDuration",
+  default: dayjs(new Date()),
+});
+
+const totalSpending = selector({
+  key: "totalSpending",
+  get: ({ get }) => {
+    const expenses = get(expense);
+    const total = expenses
+      .map((e) => e.Price)
+      .reduce((next, current) => next + current, 0);
+    return total;
+  },
+});
+
+const expensesWithPercentage = selector({
+  key: "expensesWithPercentage",
+  get: ({ get }) => {
+    const expenses = get(expense);
+    const duration = get(expenseDuration);
+    const exInThisDuration = expenses.filter((e) => {
+      const expenseDate = dayjs(e.Date);
+
+      if (
+        duration?.year() === expenseDate.year() &&
+        duration?.month() === expenseDate.month()
+      ) {
+        return e;
+      }
+    });
+    const totalSpendingInThisDuration = exInThisDuration
+      .map((e) => e.Price)
+      .reduce((next, current) => next + current, 0);
+    // Percent: parseFloat(((e.Price / total) * 100).toFixed(2)),
+
+    const exWithPercent = exInThisDuration.map((e) => {
+      return {
+        ...e,
+        Percent: Math.round((e.Price / totalSpendingInThisDuration) * 100),
+      };
+    });
+
+    return {
+      expenses: exWithPercent,
+      totalSpending: totalSpendingInThisDuration,
+    };
+  },
 });
 
 const upcomingExpenses = selector({
@@ -13,7 +63,7 @@ const upcomingExpenses = selector({
   get: ({ get }) => {
     const expenses = get(expense);
     const upEx = expenses.filter((e) => {
-      const diff = moment(e.Date).diff(new Date());
+      const diff = dayjs(e.Date).diff(new Date());
 
       if (diff > 0) {
         return e;
@@ -27,18 +77,18 @@ type groups = {
   [x: number]: [];
 };
 
-const expensesPercentage = selector({
-  key: "expensesPercentage",
+const percentagePerType = selector({
+  key: "percentagePerType",
   get: ({ get }) => {
     const expenses = get(expense);
     const groups = lodash.groupBy(expenses, "Type") as groups;
     const percentages: percentages[] = Object.keys(groups).map((key) => {
       const parsedInt = parseInt(key);
-      const amount = groups[parsedInt].length;
+      const Amount = groups[parsedInt].length;
       const percentage: percentages = {
-        type: getType(parsedInt as expenseType),
-        amount,
-        percent: Math.round((amount / expenses.length) * 100),
+        Type: getType(parsedInt as expenseType),
+        Amount,
+        Percent: Math.round((Amount / expenses.length) * 100),
       };
       return percentage;
     });
@@ -48,4 +98,11 @@ const expensesPercentage = selector({
   },
 });
 
-export { expense, upcomingExpenses, expensesPercentage };
+export {
+  expense,
+  upcomingExpenses,
+  percentagePerType,
+  expensesWithPercentage,
+  totalSpending,
+  expenseDuration,
+};
