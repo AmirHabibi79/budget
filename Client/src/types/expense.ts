@@ -1,11 +1,15 @@
+import { Dayjs } from "dayjs";
+
 export type expense = {
   Id: number;
   Name: string;
   Type: expenseType;
-  Date: Date;
+  Date: Dayjs;
   Price: number;
 };
-
+export type expenseWithPercentage = expense & {
+  Percent: number;
+};
 export enum expenseType {
   Eating,
   Clothing,
@@ -13,7 +17,7 @@ export enum expenseType {
   Insurance,
 }
 export type percentages = {
-  type: string;
-  amount: number;
-  percent: number;
+  Type: string;
+  Amount: number;
+  Percent: number;
 };
