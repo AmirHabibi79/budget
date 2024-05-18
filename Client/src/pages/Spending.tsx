@@ -24,13 +24,20 @@ export default function Spending() {
   }, [expenses]);
   return (
     <div>
-      <button onClick={() => setOpen(true)}>
-        <CalendarIcon />
-      </button>
-      <span>
-        {date.startOf("M").format("YYYY-MMMM-DD")} to{" "}
-        {date.endOf("M").format("YYYY-MMMM-DD")}
-      </span>
+      <div>
+        <button onClick={() => setOpen(true)}>
+          <CalendarIcon />
+        </button>
+        <span className="text-center mx-auto w-full inline-block mb-2">
+          <span className="font-bold">
+            {date.startOf("M").format("YYYY-MMMM-DD")}
+          </span>{" "}
+          to{" "}
+          <span className="font-bold">
+            {date.endOf("M").format("YYYY-MMMM-DD")}
+          </span>
+        </span>
+      </div>
       <DatePicker
         open={open}
         className="!hidden"
@@ -45,22 +52,25 @@ export default function Spending() {
       />
       {expenses.length === 0 ? (
         <>
-          <span className="capitalize w-full block text-center">
+          <span className="capitalize w-full block text-center font-thin">
             there is no expenses
           </span>
         </>
       ) : (
         <>
-          <PieChart
-            Data={expenses}
-            LabelOn="Name"
-            DataOn="Percent"
-            Colors={colors}
-            Label="percentage of spending"
-          />
-          <span className="w-full block text-center">
-            total spending :{" " + totalSpending}
-          </span>
+          <div className="h-[370px] mb-3">
+            <PieChart
+              Data={expenses}
+              LabelOn="Name"
+              DataOn="Percent"
+              Colors={colors}
+              Label="percentage of spending"
+            />
+            <span className="w-full block text-center my-1">
+              <span className="font-thin">total spending :</span>
+              <span className="font-bold">{" " + totalSpending}</span>
+            </span>
+          </div>
           <AllExpensesList Colors={colors} Expenses={expenses} />
         </>
       )}

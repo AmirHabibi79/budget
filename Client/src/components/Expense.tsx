@@ -3,13 +3,14 @@ import AddExpenceModal from "./AddExpenceModal";
 import { Button } from "@mui/material";
 import useExpense from "../hooks/useExpense";
 import usePercentagePerType from "../hooks/usePercentagePerType";
+import CustomCard from "./CustomCard";
 
 export default function Expense() {
   const [expenses] = useExpense();
   const [open, setOpen] = useState(false);
   const percent = usePercentagePerType();
   return (
-    <div className="w-full flex flex-col justify-between p-2 shadow-[2px_4px_20px_-4px_rgba(0,0,0,0.1)] rounded-md">
+    <CustomCard className="w-full flex flex-col justify-between p-2">
       <span className="font-thin capitalize">
         expenses: <span className="font-bold">{expenses.length}</span>
       </span>
@@ -31,6 +32,6 @@ export default function Expense() {
       >
         add expense
       </Button>
-    </div>
+    </CustomCard>
   );
 }

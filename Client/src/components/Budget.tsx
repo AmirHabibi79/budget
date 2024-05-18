@@ -3,6 +3,7 @@ import { useState } from "react";
 import EditBudgetModal from "./EditBudgetModal";
 import useBudget from "../hooks/useBudget";
 import useNetWorth from "../hooks/useNetWorth";
+import CustomCard from "./CustomCard";
 
 export default function Budget() {
   const [budget] = useBudget();
@@ -12,7 +13,7 @@ export default function Budget() {
   //     expenses.map((e) => e.Price).reduce((next, current) => next + current, 0);
   const netWorth = useNetWorth();
   return (
-    <div className="w-full flex flex-col justify-between p-2 shadow-[2px_4px_20px_-4px_rgba(0,0,0,0.1)] rounded-md">
+    <CustomCard className="w-full flex flex-col justify-between p-2">
       <span className="font-thin capitalize">
         budget: <span className="font-bold">{budget}</span>
       </span>
@@ -35,6 +36,6 @@ export default function Budget() {
         edit budget
       </Button>
       <EditBudgetModal open={open} handleClose={() => setOpen(false)} />
-    </div>
+    </CustomCard>
   );
 }

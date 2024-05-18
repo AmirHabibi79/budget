@@ -6,7 +6,7 @@ export default function Navbar() {
     { to: "/spending", text: "spending" },
   ];
   return (
-    <nav className=" w-full absolute bottom-0 border-t-[#A91D3A] border-t-[0.5px]">
+    <nav className=" z-10 bg-[#eeeeee] h-[40px] w-full absolute bottom-0 border-t-[#A91D3A] border-t-[0.5px]">
       <div className="flex items-center justify-between p-2">
         {routes.map((r, i) => (
           <NavLink

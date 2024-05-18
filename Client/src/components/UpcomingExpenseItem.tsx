@@ -1,9 +1,10 @@
 import { expense } from "../types/expense";
 import getType from "../helper/getExpenseTypeAsString";
+import CustomCard from "./CustomCard";
 export default function ExpenceItem({ Name, Date, Price, Type }: expense) {
   let exType = getType(Type);
   return (
-    <div className="flex justify-between shadow-[2px_4px_20px_-4px_rgba(0,0,0,0.1)] rounded-md p-2 h-[70px]">
+    <CustomCard className="flex justify-between w-full h-[70px] p-2">
       <div className="flex flex-col justify-between">
         <div className="flex items-center gap-2">
           <span className="font-semibold">{Name}</span>
@@ -12,6 +13,6 @@ export default function ExpenceItem({ Name, Date, Price, Type }: expense) {
         <span>{Date.format("YYYY/MM/DD").toString()}</span>
       </div>
       <span className="font-semibold">{Price}</span>
-    </div>
+    </CustomCard>
   );
 }
